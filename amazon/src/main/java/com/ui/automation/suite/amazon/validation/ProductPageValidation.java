@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ui.automation.suite.amazon.data.World;
 import com.ui.automation.suite.amazon.pom.AddCartPage;
 import com.ui.automation.suite.amazon.utils.Constants;
 import com.ui.automation.suite.amazon.pom.AddCartPage;
@@ -30,6 +31,9 @@ public class ProductPageValidation {
 	@Autowired
 	AddCartPage addCartPage;
 	
+	@Autowired
+	World world;
+	
 	private static Logger logger = LogManager.getLogger(ProductPageValidation.class);
 	
 		
@@ -43,7 +47,7 @@ public class ProductPageValidation {
 			DecimalFormat decimalFormat = new DecimalFormat("#,##,###");
 			String atualformattedValue = decimalFormat.format(Double.parseDouble(actualPrice.replace(",", "")));
 			atualformattedValue = atualformattedValue.replace(",", "");
-			String expectedPrice = Constants.getSavedValues(productPrice).replace(",", "");
+			String expectedPrice = world.get(productPrice).toString().replace(",", "");
 			assertEquals(atualformattedValue, expectedPrice, "ProductPage Price and SubTotal Price is not matching");
 		}	
 		
@@ -51,7 +55,7 @@ public class ProductPageValidation {
 			List<String> expectedPriceKey = Arrays.asList(productPrice.split(","));
 			double expectecSubTotal = 0;
 			for (int i = 0; i < expectedPriceKey.size(); i++) {
-				String value = Constants.getSavedValues(expectedPriceKey.get(i)).replace(",", "");
+				String value = world.get(expectedPriceKey.get(i)).toString().replace(",", "");
 				expectecSubTotal += Double.parseDouble(value);
 			}
 			double actualSubTotal = Double.valueOf(addCartPage.getSubTotalPrice().replace(",", ""));
@@ -68,7 +72,8 @@ public class ProductPageValidation {
 				String atualformattedValue = decimalFormat
 						.format(Double.parseDouble(addCartPage.getCartPriceList().get(i).replace(",", "")));
 				actualCartPriceList.add(atualformattedValue.replace(",", ""));
-				expectedPriceList.add(Constants.getSavedValues(expectedPriceKeyList.get(i)).replace(",", ""));
+				expectedPriceList.add(world.get(expectedPriceKeyList.get(i)).toString().replace(",", ""));
+//				expectedPriceList.add(Constants.getSavedValues(expectedPriceKeyList.get(i)).replace(",", ""));
 			}
 			assertEquals(actualCartPriceList, expectedPriceList, "ProductPage Price and Cart Page Price is not matching");
 		}

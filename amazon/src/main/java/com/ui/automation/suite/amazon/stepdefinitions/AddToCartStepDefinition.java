@@ -50,7 +50,7 @@ public class AddToCartStepDefinition extends CucumberStepDefinition {
 		productPageValidation.validateSubTotalPriceIsMatching(productPrice);
 	}
 
-	@Then("verify the subtotal price on the cart page matches the product sum {string}")
+	@And("verify the subtotal price on the cart page matches the product sum {string}")
 	public void verifyProductPricesWithSumOfSubTotal(String productPrice){
 		productPageValidation.validateTwoSumProductIsMatchingSubTotalPrice(productPrice);
 

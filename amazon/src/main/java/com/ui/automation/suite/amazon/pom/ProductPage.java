@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ui.automation.suite.amazon.data.World;
 import com.ui.automation.suite.amazon.utils.CommonUtils;
 import com.ui.automation.suite.amazon.utils.Constants;
 
@@ -18,6 +19,9 @@ public class ProductPage extends AbstractPage{
 public ProductPage(WebDriver driver, CommonUtils utils) {
 		super(driver, utils);
 	}
+
+@Autowired
+World world;
 
 private static Logger logger = LogManager.getLogger(ProductPage.class);
 	
@@ -47,7 +51,8 @@ private static Logger logger = LogManager.getLogger(ProductPage.class);
 		logger.info("focus moved to child window");
 		utils.waitforElementToBePresent(PRODUCT_PAGE_PRICE_XPATH, Constants.timeout);
 		logger.info("product price elemt is present");
-		Constants.savedValues.put(productPrice, utils.getElementText(PRODUCT_PAGE_PRICE_XPATH));
+		world.put(productPrice,utils.getElementText(PRODUCT_PAGE_PRICE_XPATH));
+//		Constants.savedValues.put(productPrice, utils.getElementText(PRODUCT_PAGE_PRICE_XPATH));
 		logger.info("save the product price as "+ utils.getElementText(PRODUCT_PAGE_PRICE_XPATH));
 	}
 
