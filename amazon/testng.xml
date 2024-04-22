@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Amazon automation test Suite">
+  <test name="Add to cart">
+    <classes>
+      <!-- Specify your Cucumber runner class here -->
+      <class name="com.ui.automation.suite.amazon.stepdefinitions.Init"/>
+      <class name="runner.SuiteRunner"/>
+    </classes>
+  </test>
+</suite>
