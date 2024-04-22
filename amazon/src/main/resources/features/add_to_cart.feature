@@ -1,7 +1,7 @@
 #Author: Gaya3
 @Amazon
 @Cart-category
-@add-to-Cart
+@Add-to-Cart
 @Single
 @Multiple
 Feature: Add to cart 
